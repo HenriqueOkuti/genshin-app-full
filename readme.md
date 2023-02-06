@@ -8,15 +8,10 @@
 
 <p>Genshin Task Manager is a Task Management App for players of Genshin Impact. Here you'll be able to track your character progression (talents, level, friendship and constellation) alongside the ability to plan your tasks in advange. Currently you are able to create task lists for Dungeon, Boss, Weekly Boss and Enemy materials, alongside local specialties, as long as there is a character using those materials.</p>
 
-<<<<<<< HEAD
-<div style='display: flex; '>
-    <img src='./app images/homepage.png' alt='homepage sample' width='45%'/>
-    <img src='./app images/characters.png' alt='characters sample' width='45%'/>
-=======
+
 <div style='display: flex;' align='center' >
-    <img src='./app images/homepage.png' alt='homepage sample' width='40%'/>
+    <img src='./app images/home thoma theme.png' alt='homepage sample' width='40%'/>
     <img src='./app images/characters.png' alt='characters sample' width='40%'/>
->>>>>>> 651ba7cb88d709fd48f6c15ae0a56d75d6dd3f62
 </div>
 
 ## How to run
