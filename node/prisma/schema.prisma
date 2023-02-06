@@ -1,0 +1,293 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BackpackInfo {
+  id             Int            @id @default(autoincrement())
+  userId         Int
+  weeklyBossMat  Boolean        @default(false)
+  bossMat        Boolean        @default(false)
+  dungeonMat     Boolean        @default(false)
+  enemyMat       Boolean        @default(false)
+  localSpecialty Boolean        @default(false)
+  weaponMat      Boolean        @default(false)
+  itemId         Int
+  quantity       Int
+  UserBackpack   UserBackpack[]
+}
+
+model BossMats {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  key        String       @db.VarChar(255)
+  rarity     Int          @default(4)
+  Characters Characters[]
+}
+
+model CharacterAscensions {
+  id          Int        @id @default(autoincrement())
+  characterId Int
+  title       String     @db.VarChar(255)
+  text        String
+  Characters  Characters @relation(fields: [characterId], references: [id])
+}
+
+model CharacterConstellations {
+  id          Int        @id @default(autoincrement())
+  characterId Int
+  number      Int
+  title       String     @db.VarChar(255)
+  text        String
+  Characters  Characters @relation(fields: [characterId], references: [id])
+}
+
+model CharacterTalents {
+  id          Int           @id @default(autoincrement())
+  characterId Int
+  number      Int
+  title       String        @db.VarChar(255)
+  text        String
+  Characters  Characters    @relation(fields: [characterId], references: [id])
+  UserTalents UserTalents[]
+}
+
+model Characters {
+  id                      Int                       @id @default(autoincrement())
+  name                    String                    @db.VarChar(255)
+  elementId               Int
+  weaponId                Int
+  localSpecialtyId        Int
+  dungeonMatId            Int
+  bossMatId               Int
+  weeklyBossMatId         Int
+  BossMats                BossMats                  @relation(fields: [bossMatId], references: [id])
+  DungeonMats             DungeonMats               @relation(fields: [dungeonMatId], references: [id])
+  Elements                Elements                  @relation(fields: [elementId], references: [id])
+  LocalSpecialty          LocalSpecialty            @relation(fields: [localSpecialtyId], references: [id])
+  Weapons                 Weapons                   @relation(fields: [weaponId], references: [id])
+  WeeklyBossMats          WeeklyBossMats            @relation(fields: [weeklyBossMatId], references: [id])
+  CharacterAscensions     CharacterAscensions[]
+  CharacterConstellations CharacterConstellations[]
+  CharacterEnemyMats      CharacterEnemyMats[]
+  CharacterTalents        CharacterTalents[]
+  UserCharacters          UserCharacters[]
+  UserTalents             UserTalents[]
+}
+
+model DungeonMats {
+  id           Int          @id @default(autoincrement())
+  name         String       @db.VarChar(255)
+  class        String       @db.VarChar(255)
+  rarity       Int
+  key          String       @db.VarChar(255)
+  day          String       @db.VarChar(255)
+  dungeonId    Int
+  weaponMat    Boolean
+  characterMat Boolean
+  Dungeons     Dungeons     @relation(fields: [dungeonId], references: [id])
+  Characters   Characters[]
+}
+
+model Dungeons {
+  id          Int           @id @default(autoincrement())
+  name        String        @db.VarChar(255)
+  text        String
+  regionId    Int
+  Region      Region        @relation(fields: [regionId], references: [id])
+  DungeonMats DungeonMats[]
+}
+
+model Elements {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  image      String       @db.VarChar(255)
+  Characters Characters[]
+}
+
+model EnemyMats {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  key                String               @db.VarChar(255)
+  rarity             Int
+  CharacterEnemyMats CharacterEnemyMats[]
+}
+
+model Gems {
+  id        Int    @id @default(autoincrement())
+  name      String @db.VarChar(255)
+  image     String @db.VarChar(255)
+  rarity    Int
+  elementId Int
+}
+
+model LocalSpecialty {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  key        String       @db.VarChar(255)
+  rarity     Int          @default(1)
+  Characters Characters[]
+}
+
+model Region {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  Dungeons Dungeons[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  token     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Users     Users    @relation(fields: [userId], references: [id])
+}
+
+model TaskInfo {
+  id             Int     @id @default(autoincrement())
+  weeklyBossMat  Boolean @default(false)
+  bossMat        Boolean @default(false)
+  dungeonMat     Boolean @default(false)
+  enemyMat       Boolean @default(false)
+  localSpecialty Boolean @default(false)
+  taskId         Int
+  itemId         Int
+  quantity       Int
+  Tasks          Tasks   @relation(fields: [taskId], references: [id])
+}
+
+model Tasks {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  userId          Int
+  image           String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  TaskInfo        TaskInfo[]
+  TempTransaction TempTransaction[]
+}
+
+model UserBackpack {
+  id             Int          @id @default(autoincrement())
+  userId         Int
+  backpackInfoId Int
+  BackpackInfo   BackpackInfo @relation(fields: [backpackInfoId], references: [id])
+  Users          Users        @relation(fields: [userId], references: [id])
+}
+
+model UserCharacters {
+  id                 Int                  @id @default(autoincrement())
+  userId             Int
+  characterId        Int
+  level              Int                  @default(1)
+  friendship         Int                  @default(1)
+  Characters         Characters           @relation(fields: [characterId], references: [id])
+  Users              Users                @relation(fields: [userId], references: [id])
+  UserAscensions     UserAscensions[]
+  UserConstellations UserConstellations[]
+}
+
+model Users {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @default("New User") @db.VarChar(255)
+  email              String               @unique(map: "Index_email") @db.VarChar(255)
+  password           String               @db.VarChar(255)
+  image              String               @default("https://i.redd.it/02qhtmulmjs71.jpg") @db.VarChar(255)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  Session            Session?
+  TempItems          TempItems[]
+  TempTransaction    TempTransaction?
+  UserAscensions     UserAscensions[]
+  UserBackpack       UserBackpack[]
+  UserCharacters     UserCharacters[]
+  UserConstellations UserConstellations[]
+  UserTalents        UserTalents[]
+}
+
+model Weapons {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  image      String       @db.VarChar(255)
+  Characters Characters[]
+}
+
+model WeeklyBossMats {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  key        String       @db.VarChar(255)
+  rarity     Int          @default(5)
+  Characters Characters[]
+}
+
+model UserAscensions {
+  id              Int            @id @default(autoincrement())
+  userId          Int
+  userCharacterId Int
+  value           Int            @default(1)
+  UserCharacters  UserCharacters @relation(fields: [userCharacterId], references: [id])
+  Users           Users          @relation(fields: [userId], references: [id])
+}
+
+model UserConstellations {
+  id              Int            @id @default(autoincrement())
+  userId          Int
+  userCharacterId Int
+  value           Int            @default(1)
+  UserCharacters  UserCharacters @relation(fields: [userCharacterId], references: [id])
+  Users           Users          @relation(fields: [userId], references: [id])
+}
+
+model UserTalents {
+  id               Int              @id @default(autoincrement())
+  userId           Int
+  userCharacterId  Int
+  characterId      Int
+  talentId         Int
+  value            Int              @default(1)
+  Characters       Characters       @relation(fields: [characterId], references: [id])
+  CharacterTalents CharacterTalents @relation(fields: [talentId], references: [id])
+  Users            Users            @relation(fields: [userId], references: [id])
+}
+
+model CharacterEnemyMats {
+  id          Int        @id @default(autoincrement())
+  characterId Int
+  enemyMatId  Int
+  Characters  Characters @relation(fields: [characterId], references: [id])
+  EnemyMats   EnemyMats  @relation(fields: [enemyMatId], references: [id])
+}
+
+model TempItems {
+  id             Int     @id @default(autoincrement())
+  userId         Int
+  weeklyBossMat  Boolean @default(false)
+  bossMat        Boolean @default(false)
+  dungeonMat     Boolean @default(false)
+  enemyMat       Boolean @default(false)
+  localSpecialty Boolean @default(false)
+  weaponMat      Boolean @default(false)
+  itemId         Int
+  quantity       Int     @default(1)
+  rarity         Int
+  name           String
+  key            String
+  Users          Users   @relation(fields: [userId], references: [id])
+}
+
+model TempTransaction {
+  id             Int     @id @default(autoincrement())
+  userId         Int     @unique(map: "Index_userId")
+  name           String  @db.VarChar(255)
+  image          String
+  isPost         Boolean @default(false)
+  isPut          Boolean @default(false)
+  originalTaskId Int?
+  Tasks          Tasks?  @relation(fields: [originalTaskId], references: [id], onDelete: Restrict)
+  Users          Users   @relation(fields: [userId], references: [id])
+}

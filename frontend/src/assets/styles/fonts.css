@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "Inter";   /*Can be any text*/
+    src: local("Inter"),
+      url("../../fonts/Inter/Inter-VariableFont_slnt\,wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Hoyo";   /*Can be any text*/
+  src: local("HYWenHei-85W"),
+    url("../../fonts/HYWenHei-85W/HYWenHei-85W.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Iceberg";   /*Can be any text*/
+  src: local("Iceberg"),
+    url("../../fonts/Iceberg/Iceberg-Regular.ttf") format("truetype");
+}
