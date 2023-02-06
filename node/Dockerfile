@@ -4,7 +4,7 @@ WORKDIR /usr/src
 
 COPY package.json .
 
-EXPOSE 8444
+EXPOSE 5000
 
 RUN npm i
 

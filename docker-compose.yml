@@ -22,7 +22,7 @@ services:
     build: ./node
     container_name: app_node
     ports:
-      - 8444:8444
+      - 5000:5000
     env_file:
       - ./node/.env
     volumes:
@@ -37,7 +37,7 @@ services:
     build: ./nginx
     container_name: nginx
     ports:
-      - 8500:8500
+      - 80:80
     volumes:
       - build_react:/var/www/html
     depends_on:
