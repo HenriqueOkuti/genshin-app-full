@@ -29,6 +29,7 @@ async function getDungeonMats() {
 }
 
 async function getDungeonMatInfo(id: number) {
+  console.log(id);
   return await prisma.dungeonMats.findFirst({
     where: {
       id: id,

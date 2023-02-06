@@ -24,6 +24,9 @@ export async function fetchUserTasksToday(userToken) {
 
     //console.log('filtering for today');
     const fixedTasks = [];
+
+    console.log(response.tasks[0]);
+
     for (let i = 0; i < response.tasks.length; i++) {
       const daysInfo = AddFullListOfDays(response.tasks[i]);
       const today = daysDictionary[dayjs().day()];
@@ -76,6 +79,8 @@ function AddFullListOfDays(task) {
   };
   const daysUsed = {};
   const items = task.items;
+
+  console.log(items);
 
   for (let i = 0; i < items.length; i++) {
     if (items[i].itemInfo.day) {

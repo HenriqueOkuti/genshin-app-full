@@ -29,6 +29,7 @@ async function handleFetchUserTasks(userId: number) {
       if (item.localSpecialty) {
         itemInfo = await itemsRepository.getLocalSpecialtyInfo(item.itemId);
       }
+
       newItems.push({ ...item, itemInfo: itemInfo });
       //
     }
