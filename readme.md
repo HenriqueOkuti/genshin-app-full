@@ -1,6 +1,6 @@
 # Genshin Task Manager
 
-<img src='./app images/login.png' alt='login sample'/>
+<img src='./app images/login.png' alt='login sample' height='30%'/>
 
 ## About
 
