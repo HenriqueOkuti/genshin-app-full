@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   getAllCharacters,
   getAllElements,
@@ -25,14 +24,12 @@ export async function fetchUserCharacters(userToken, charsDict, allCharsDict, al
     }
   }
 
-  //
   const { weapons } = await fetchWeapons(token);
   const weaponsDict = {};
   for (let i = 0; i < weapons.length; i++) {
     weaponsDict[weapons[i].id] = weapons[i].name;
   }
 
-  //Fetches user characters
   const { characters } = await getUserCharacters(token);
 
   const allCharsElementsDict = {};
@@ -94,17 +91,14 @@ export async function fetchAllCharacters(userToken) {
     }
   }
 
-  //
   const { weapons } = await fetchWeapons(token);
   const weaponsDict = {};
   for (let i = 0; i < weapons.length; i++) {
     weaponsDict[weapons[i].id] = weapons[i].name;
   }
 
-  //Fetches all characters
   const { characters } = await getAllCharacters(token);
   if (characters) {
-    //
     const fixedCharacters = characters.map((char) => {
       const charKey = char.name.toLowerCase().replace(' ', '_').replace(')', '').replace('(', '');
 

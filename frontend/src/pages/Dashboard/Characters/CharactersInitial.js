@@ -61,14 +61,23 @@ export function CharInitialMain({ elements, weapons, setPageState, windowWidth, 
 }
 
 //mobile version
-export function CharInitialMobile({ elements, weapons, setPageState }) {
-  const [filterType, setFilterType] = useState(null);
+export function CharInitialMobile({ elements, weapons, setPageState, windowWidth, userChars, setCharToMod }) {
+  const [filterType, setFilterType] = useState({ name: null });
+  const [updatedFilter, setUpdatedFilter] = useState(false);
+  const [suppText, setSuppText] = useState('');
+  const [filteredChars, setFilteredChars] = useState([...userChars]);
+
+  useEffect(() => {
+    if (userChars[0]) {
+      handleFilter(filterType, [...userChars], setFilteredChars, setSuppText);
+    }
+  }, [updatedFilter]);
 
   return (
     <>
       <AuxContainer>
         <CharactersHeader>
-          <div>Characters</div>
+          <div>Characters {suppText}</div>
           <CharactersHeaderButtons>
             <div>
               <HandleRedirectButton pageState={'initial'} setPageState={setPageState} />
@@ -77,12 +86,22 @@ export function CharInitialMobile({ elements, weapons, setPageState }) {
               <FilterMenuInitial
                 setFilterType={setFilterType}
                 filterType={filterType}
+                setUpdatedFilter={setUpdatedFilter}
+                updatedFilter={updatedFilter}
                 elements={elements}
                 weapons={weapons}
               />
             </div>
           </CharactersHeaderButtons>
         </CharactersHeader>
+        <CharactersList width={windowWidth}>
+          <InitialRenderImages
+            arrayChars={!filterType.name ? userChars : filteredChars}
+            elements={elements}
+            setPageState={setPageState}
+            setCharToMod={setCharToMod}
+          />
+        </CharactersList>
       </AuxContainer>
     </>
   );

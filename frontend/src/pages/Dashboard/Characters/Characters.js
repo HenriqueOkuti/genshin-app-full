@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '../../../hooks/useTheme';
 import useToken from '../../../hooks/useToken';
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
-import { allImages } from '../../../utils/imageImporter';
 import { CharAddMain, CharAddMobile } from './CharactersAdd';
 import { CharAddingMain, CharAddingMobile } from './CharactersAdding';
 import { CharEditMain, CharEditMobile } from './CharactersEdit';
@@ -39,7 +38,6 @@ export function CharactersManager() {
   const [weapons, setWeapons] = useState([]);
 
   useEffect(() => {
-    //Handles width of screen
     useWindowWidth(setWindowWidth);
   }, []);
 
@@ -81,20 +79,17 @@ export function CharactersManager() {
 
   useEffect(() => {
     if (characterToEdit) {
-      //console.log('going to edit...');
       setPageState('edit');
     }
   }, [characterToEdit]);
 
   useEffect(() => {
     if (characterToAdd) {
-      //console.log('going to adding...');
       setPageState('adding');
     }
   }, [characterToAdd]);
 
   if (window.innerWidth > 700) {
-    //Render main version
     if (!elements[0]) {
       return (
         <>
@@ -104,7 +99,6 @@ export function CharactersManager() {
     }
 
     if (pageState === 'initial') {
-      //render initial version
       return (
         <>
           <CharInitialMain
@@ -119,7 +113,6 @@ export function CharactersManager() {
       );
     }
     if (pageState === 'add') {
-      //render add version
       return (
         <>
           <CharAddMain
@@ -134,7 +127,6 @@ export function CharactersManager() {
       );
     }
     if (pageState === 'adding') {
-      //render adding version
       return (
         <>
           <CharAddingMain
@@ -147,7 +139,6 @@ export function CharactersManager() {
       );
     }
     if (pageState === 'edit') {
-      //render edit version
       return (
         <>
           <CharEditMain
@@ -160,21 +151,25 @@ export function CharactersManager() {
       );
     }
   } else {
-    //Render mobile version
     if (pageState === 'initial') {
-      //render initial version
-      return <CharInitialMobile elements={elements} weapons={weapons} />;
+      return (
+        <CharInitialMobile
+          elements={elements}
+          weapons={weapons}
+          setPageState={setPageState}
+          windowWidth={windowWidth}
+          userChars={userCharacters}
+          setCharToMod={setCharacterToEdit}
+        />
+      );
     }
     if (pageState === 'add') {
-      //render add version
       return <CharAddMobile />;
     }
     if (pageState === 'adding') {
-      //render adding version
       return <CharAddingMobile />;
     }
     if (pageState === 'edit') {
-      //render edit version
       return <CharEditMobile />;
     }
   }

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ButtonsContainer,
   ExitContainer,
@@ -56,7 +56,6 @@ export function SideMenu({ update, setUpdate, userData }) {
 
 async function alterTheme(theme, modifyTheme, setTheme, setUpdate, update) {
   const len = DefaultThemes.length;
-  //console.log(theme.id);
   const newIndex = theme.id >= len ? 0 : theme.id;
   const newTheme = DefaultThemes[newIndex];
 
@@ -70,5 +69,6 @@ async function alterTheme(theme, modifyTheme, setTheme, setUpdate, update) {
 
 function logout(navigate) {
   localStorage.removeItem('token');
+  localStorage.removeItem('items');
   navigate('/login');
 }

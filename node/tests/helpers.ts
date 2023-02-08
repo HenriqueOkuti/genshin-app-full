@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import faker from '@faker-js/faker';
 import bcrypt from 'bcrypt';
 import { Users } from '@prisma/client';
-import { prisma } from './config/index';
+import { prisma } from '../source/config/index';
 import { createUser } from './factories/authentication.factory';
 
 export async function cleanDb() {

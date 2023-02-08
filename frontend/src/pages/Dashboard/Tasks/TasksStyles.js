@@ -94,8 +94,6 @@ export const TasksList = styled.div`
   width: 100%;
   overflow-y: scroll;
 
-  //background-color: blue;
-
   > img {
   }
 `;
@@ -130,8 +128,11 @@ export const TaskImage = styled.div`
   margin-left: 15px;
   margin-right: 15px;
   height: 100%;
+  min-height: 160px;
+  height: 100%;
 
   img {
+    min-height: 160px;
     height: 100%;
     width: 160px;
     display: block;
@@ -313,7 +314,6 @@ export const ExcludeItemContainer = styled.div`
   justify-content: center;
 
   width: 20%;
-  //height: 100%;
 
   div {
     font-family: 'Inter', arial;
@@ -348,7 +348,6 @@ export const AddItemButtom = styled.div`
     height: 60px;
     width: 40px;
     border-radius: 10px;
-    //background-color: ${(props) => props.theme.hex4};
   }
 `;
 
@@ -382,6 +381,10 @@ export const ItemsContainer = styled.div`
   align-items: self-start;
   text-align: center;
 
+  border: 1px solid #000000;
+  border-radius: 15px;
+  padding-bottom: 10px;
+
   @media (max-width: 1500px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
@@ -401,14 +404,16 @@ export const ModalItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  height: 150px;
+  height: 170px;
   width: 150px;
 
   margin-top: 10px;
-  border: 1px solid black;
+  //border: 1px solid black;
   border-radius: 15px;
+
+  background-color: ${(props) => props.colors};
 
   img {
     background-color: ${(props) => props.colors};
@@ -419,6 +424,12 @@ export const ModalItemContainer = styled.div`
 `;
 
 export const ModalItemTitle = styled.div`
+  background-color: #1f3265;
+  border-radius: 15px;
+  text-align: center;
+  color: #ffffff;
+  margin: 5px 0 10px 0;
+  padding: 5px 0 0px 0;
   height: 40px;
   width: 90%;
 `;

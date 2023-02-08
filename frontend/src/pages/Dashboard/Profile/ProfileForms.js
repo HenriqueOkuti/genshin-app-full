@@ -16,7 +16,6 @@ import {
 } from './ProfileStyles';
 
 export function ProfileMain({ userData, updatedData, setUpdatedData }) {
-  //console.log(userData);
   const tokenHook = useToken();
   const [token, setToken] = useState(tokenHook);
   const [newUserData, setNewUserData] = useState({ ...userData });
@@ -114,7 +113,6 @@ export function ProfileMain({ userData, updatedData, setUpdatedData }) {
               onChange={(e) => setImageURL(e.target.value)}
               fullWidth
               disabled={false}
-              key={userData.image}
               defaultValue={userData.image}
               id="outlined-required"
             />
@@ -141,12 +139,11 @@ export function ProfileMain({ userData, updatedData, setUpdatedData }) {
 }
 
 export function ProfileMobile({ userData, updatedData, setUpdatedData }) {
-  //console.log(userData);
   const [newUserData, setNewUserData] = useState({ ...userData });
   const [validImage, setValidImage] = useState('original');
   const [imageURL, setImageURL] = useState('');
   const [validData, setValidData] = useState(false);
-  //
+
   useEffect(async () => {
     if (imageURL !== userData.image && imageURL) {
       const imageIsValid = await verifyURL(imageURL);

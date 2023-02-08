@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../../hooks/useTheme';
 import { MenuBackground } from './ContentMenuStyles';
 

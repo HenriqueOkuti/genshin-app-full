@@ -1,4 +1,4 @@
-import app, { init } from '../app';
+import app, { init } from '../../source/app';
 import faker from '@faker-js/faker';
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';

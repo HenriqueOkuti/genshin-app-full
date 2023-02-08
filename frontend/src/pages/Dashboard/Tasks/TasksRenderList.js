@@ -41,7 +41,7 @@ export function RenderTasks({ task, setTaskToMod, setPageState, windowWidth }) {
             </div>
           </TaskDates>
           <TaskDays>
-            <div>Days: {daysText}</div>
+            <div>Days: {task.daysInfo ? task.daysInfo.text : 'Loading...'}</div>
           </TaskDays>
         </TaskInfoContainer>
       </TaskContainer>

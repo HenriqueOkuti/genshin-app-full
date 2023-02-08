@@ -45,7 +45,6 @@ export async function getAllElements(token) {
 }
 
 export async function postUserCharacter(token, newUserCharacter) {
-  //console.log(token, newUserCharacter);
   let returnData = null;
 
   const request = {

@@ -61,14 +61,21 @@ export const SearchBarContainer = styled.div`
 export const CharactersList = styled.div`
   display: grid;
 
-  grid-template-columns: repeat(${(props) => (props.width ? Math.floor(props.width / 275) : 3)}, 1fr);
+  grid-template-columns: repeat(${(props) => (props.width ? Math.floor(props.width / 300) : 3)}, 1fr);
+
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(${(props) => (props.width ? Math.floor(props.width / 205) : 3)}, 1fr);
+  }
+
   justify-items: center;
   align-items: self-start;
 
   gap: 5px;
-  //margin: 15px 0 0 0;
   height: 90%;
   overflow-y: scroll;
+
+  border: 1px solid #000000;
+  border-radius: 15px;
 
   > img {
   }
@@ -88,12 +95,14 @@ export const CharacterCard = styled.div`
   justify-content: center;
   flex-direction: column;
   font-family: Inter, arial;
+  font-size: 18px;
 
   padding: 10px;
 
-  border: 1px solid black;
   border-radius: 5px;
-  width: 110px;
+  width: 120px;
+
+  background-color: ${(props) => props.colors};
 `;
 
 export const CardName = styled.div`
@@ -116,7 +125,7 @@ export const CardName = styled.div`
 export const CardImage = styled.div`
   img {
     background-color: ${(props) => (props.colors ? props.colors : '#d95538')};
-    border-radius: 100%;
+    border-radius: 5px 5px 0 0;
   }
 `;
 
@@ -125,6 +134,10 @@ export const CardInfo = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  div {
+    margin: 5px 0 0px 0;
+  }
 `;
 
 export const DropdownAnchor = styled.div`
@@ -258,7 +271,6 @@ export const TalentInfo = styled.div`
   }
 
   div {
-    //width: calc(50% - 60px);
     margin-left: 15px;
   }
 `;

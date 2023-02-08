@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { prisma } from '../config/index';
+import { prisma } from '../../source/config/index';
 
 export async function createUser(email: string, password: string) {
   return await prisma.users.create({

@@ -1,5 +1,3 @@
-//Layout for the Main Dashboard version (non-mobile)
-
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`

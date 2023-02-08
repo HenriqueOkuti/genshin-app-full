@@ -16,7 +16,6 @@ import {
 
 export function SignUp() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [validInput, setValidInput] = useState(true);
   const [sendingRequest, setSendingRequest] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
@@ -26,7 +25,6 @@ export function SignUp() {
   });
   const navigate = useNavigate();
 
-  //Handles width of screen
   useEffect(() => {
     useWindowWidth(setWindowWidth);
   }, []);

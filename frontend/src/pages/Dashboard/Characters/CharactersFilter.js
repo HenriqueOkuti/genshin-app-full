@@ -1,22 +1,17 @@
 export function filterCharacters(characters, filterType) {
-  //console.log(characters[0]);
   if (!filterType || !filterType.name) {
-    //console.log('Default filter');
     return characters;
   }
 
   if (filterType.name === 'A-Z') {
-    //console.log('alphabetically');
     return characters.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   if (filterType.name === 'Z-A') {
-    //console.log('alphabetically reverse');
     return characters.sort((a, b) => b.name.localeCompare(a.name));
   }
 
   if (filterType.name === 'Weapon') {
-    //console.log('weapon type');
     const currentWeaponId = filterType.type?.value.id;
     const charactersWeapon = characters.filter((char) => {
       if (char.weaponId === currentWeaponId) {

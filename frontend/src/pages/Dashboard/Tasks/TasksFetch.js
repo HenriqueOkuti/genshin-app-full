@@ -1,7 +1,6 @@
 import { getAllItems, getUserTasks, postNewTask } from '../../../services/services';
 
 export async function fetchUserTasks(userToken) {
-  let allTasks = [];
   let token = userToken;
 
   if (!userToken) {
@@ -77,8 +76,6 @@ export async function createNewTask(userToken, newTaskInfo) {
 }
 
 function AddFullListOfDays(task) {
-  //console.log(task);
-
   const daysDict = {
     monday: ['Monday', 'Thursday', 'Sunday'],
     tuesday: ['Tuesday', 'Friday', 'Sunday'],

@@ -9,12 +9,10 @@ import {
   AuxContainer,
   CharactersHeader,
   CharactersHeaderButtons,
-  EditButtonsContainer,
   EditCharacterContainer,
   EditCharacterImage,
   EditCharacterOuterContainer,
   EditForms,
-  EditModifyButton,
   IndividualTalent,
   MiscInputContainer,
   TalentInfo,
@@ -68,7 +66,6 @@ export function CharAddingMain({ characterToAdd, setCharacterToAdd, setPageState
   const characterKey = characterToAdd.name.toLowerCase().replace(' ', '_').replace('(', '').replace(')', '');
   const charTalentsImages = allTalentsImage[characterKey];
 
-  //console.log('breakpoint: width === 990px')
   return (
     <>
       <AuxContainer>

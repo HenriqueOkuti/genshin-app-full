@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import {
-  PageContainer,
-  DashboardContainer,
-  SideMenuContainer,
-  MainMenuContainer,
-  ContentContainer,
-} from '../../layouts/layouts';
+import { PageContainer, DashboardContainer, SideMenuContainer, MainMenuContainer } from '../../layouts/layouts';
 import { MobileContentContainer, MobilePageContainer } from '../../layouts/Dashboard/DashboardMobile';
 import { SideMenu, MobileMenu } from '../../components/components';
 import { useTheme } from '../../hooks/useTheme';
@@ -46,7 +40,6 @@ export function Dashboard() {
     }
   }, [token, forceUpdate]);
 
-  //Handles width of screen
   useEffect(() => {
     useWindowWidth(setWindowWidth);
   }, []);

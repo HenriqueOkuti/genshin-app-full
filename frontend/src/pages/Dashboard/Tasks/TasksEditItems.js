@@ -34,9 +34,6 @@ function RenderTaskItem({ item, index, newTaskInfo, setNewTaskInfo }) {
   const [userTheme, setUserTheme] = [theme, setTheme];
   const [quantity, setQuantity] = useState(item.quantity);
 
-  //console.log(userTheme);
-  //console.log(item);
-
   const rarityDict = {
     1: '#8B949F',
     2: '#82CD47',
@@ -44,6 +41,8 @@ function RenderTaskItem({ item, index, newTaskInfo, setNewTaskInfo }) {
     4: '#a8a0db',
     5: '#F6D860',
   };
+
+  console.log(item.quantity);
 
   return (
     <ItemContainer colors={userTheme.palette}>
@@ -62,11 +61,14 @@ function RenderTaskItem({ item, index, newTaskInfo, setNewTaskInfo }) {
                 const newItems = [...newTaskInfo.items];
                 newItems[index] = newItem;
                 setNewTaskInfo({ ...newTaskInfo, items: newItems });
-              } else {
+              } else if (value > 9999) {
                 toast('Insert a correct value (max: 9999)');
+              } else if (value < 0 && typeof value === 'number') {
+                toast('Insert a correct value (min: 0)');
               }
             }}
-            defaultValue={quantity}
+            value={item.quantity}
+            defaultValue={item.quantity}
             type="number"
             min="1"
             max="9999"
@@ -83,11 +85,11 @@ function RenderTaskItem({ item, index, newTaskInfo, setNewTaskInfo }) {
 }
 
 function handleDeleteItem(item, index, newTaskInfo, setNewTaskInfo) {
-  //console.log('deleting item');
   toast('Deleting item');
-  const itemList = [...newTaskInfo.items];
-  itemList.splice(index, 1);
-  setNewTaskInfo({ ...newTaskInfo, items: [...itemList] });
 
-  //possible easier if async delete
+  const itemList = [...newTaskInfo.items];
+  console.log(itemList);
+  itemList.splice(index, 1);
+  console.log(itemList);
+  setNewTaskInfo({ ...newTaskInfo, items: [...itemList] });
 }

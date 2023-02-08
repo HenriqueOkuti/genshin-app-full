@@ -3,8 +3,6 @@ import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { AddCharacterButton } from './TasksStyles';
 
 export function HandleRedirectButton({ pageState, setPageState, setTaskToMod }) {
-  //console.log(pageState);
-
   if (pageState === 'initial') {
     return (
       <>

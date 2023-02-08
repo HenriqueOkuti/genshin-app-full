@@ -4,8 +4,6 @@ import { deleteUserCharacter, putUserCharacter } from '../../../services/Charact
 import { allTalents } from '../../../utils/abilitiesImageImporter';
 import { HandleRedirectButton } from './CharactersRedirect';
 import {
-  AddCharacterContainer,
-  AddCharacterImage,
   AuxContainer,
   CharactersHeader,
   CharactersHeaderButtons,
@@ -18,8 +16,6 @@ import {
   EditModifyButton,
   IndividualTalent,
   MiscInputContainer,
-  PromptContainer,
-  RenderAddCharacterContainer,
   TalentInfo,
   TalentsContainer,
   TalentsTitle,

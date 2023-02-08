@@ -1,7 +1,6 @@
 import { TextField } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import useToken from '../../../hooks/useToken';
 import { RenderEditTaskItems } from './TasksEditItems';
 import { createNewTask } from './TasksFetch';
 import { HandleRedirectButton } from './TasksRedirect';
@@ -9,8 +8,6 @@ import {
   AddButtomContainer,
   AuxContainer,
   CreateButton,
-  DeleteButton,
-  EditButtonsContainer,
   ImageField,
   InputColumn,
   NameField,
@@ -19,7 +16,6 @@ import {
   TaskInfoImage,
   TasksHeader,
   TasksHeaderButtons,
-  UpdateButton,
 } from './TasksStyles';
 
 export function TasksAddMain({ setPageState, windowWidth, token }) {
@@ -31,8 +27,6 @@ export function TasksAddMain({ setPageState, windowWidth, token }) {
     image: 'https://ih1.redbubble.net/image.2409410541.3111/poster,840x830,f8f8f8-pad,1000x1000,f8f8f8.jpg',
     items: [],
   });
-
-  //console.log(newTaskInfo);
 
   useEffect(async () => {
     if (newImage === '') {
@@ -67,7 +61,6 @@ export function TasksAddMain({ setPageState, windowWidth, token }) {
   }, [newImage]);
 
   useEffect(() => {
-    //validate data
     const status = verifyData(newTaskInfo);
     if (status) {
       setAbleToSend(true);
@@ -171,7 +164,6 @@ async function verifyURL(url) {
 }
 
 function verifyData(taskDetails) {
-  //console.log(taskDetails);
   if (taskDetails.name === '') {
     return false;
   }

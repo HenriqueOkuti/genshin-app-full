@@ -1,8 +1,7 @@
-import { authService } from '@/services';
+import { authService, googleData } from '@/services';
 import axios from 'axios';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import bcrypt from 'bcrypt';
 
 export async function SignUp(req: Request, res: Response) {
   try {
@@ -81,9 +80,14 @@ export async function LoginGithub(req: Request, res: Response) {
 }
 
 export async function LoginGoogle(req: Request, res: Response) {
-  console.log('LoginGoogle');
+  const userData = req.body as googleData;
+
   try {
-    return res.sendStatus(httpStatus.OK);
+    const appToken = await authService.handleGoogle(userData);
+
+    return res.status(httpStatus.OK).send({
+      token: appToken,
+    });
   } catch (error) {
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }

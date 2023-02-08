@@ -1,25 +1,15 @@
 import { Avatar } from '@material-ui/core';
 import { MobileHeader } from '../../../layouts/Dashboard/DashboardMobile';
-import {
-  ButtonsContainer,
-  ButtonText,
-  ExitContainer,
-  ThemesContainer,
-  UserContainer,
-} from '../SideMenu/SideMenuStyles';
+import { ButtonsContainer, ButtonText, ExitContainer, ThemesContainer } from '../SideMenu/SideMenuStyles';
 import { MobileUserContainer } from './MenuMobileStyles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from 'styled-components';
 import { useSetTheme } from '../../../hooks/useTheme';
 import { DefaultThemes } from '../../../assets/themes/Themes';
 import { styled } from '@mui/material/styles';
 import { AiOutlineMenu } from 'react-icons/ai';
-
-//AiOutlineMenu
 
 export function MobileMenu({ update, setUpdate, colors, userData, theme, setTheme }) {
   const navigate = useNavigate();
@@ -154,7 +144,6 @@ export function MobileMenu({ update, setUpdate, colors, userData, theme, setThem
 
 async function alterTheme(theme, modifyTheme, setTheme, setUpdate, update) {
   const len = DefaultThemes.length;
-  //console.log(theme.id);
   const newIndex = theme.id >= len ? 0 : theme.id;
   const newTheme = DefaultThemes[newIndex];
 
@@ -168,5 +157,6 @@ async function alterTheme(theme, modifyTheme, setTheme, setUpdate, update) {
 
 function logout(navigate) {
   localStorage.removeItem('token');
+  localStorage.removeItem('items');
   navigate('/login');
 }

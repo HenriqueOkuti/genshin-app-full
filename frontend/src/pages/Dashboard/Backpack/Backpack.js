@@ -16,12 +16,10 @@ export function BackpackManager() {
   const [dailyTasks, setDailyTasks] = useState([]);
 
   useEffect(() => {
-    //Handles width of screen
     useWindowWidth(setWindowWidth);
   }, []);
 
   if (windowWidth > 700) {
-    //Render main version
     return (
       <>
         <AuxContainer>
@@ -38,7 +36,6 @@ export function BackpackManager() {
       </>
     );
   } else {
-    //Render mobile version
     return (
       <>
         <AuxContainer>
@@ -64,21 +61,15 @@ export function FilterMenuBackpack() {
   const filterOptions = [
     {
       name: 'Dont look here',
-      function: () => {
-        console.log('filter');
-      },
+      function: () => {},
     },
     {
       name: 'Feature not implemented yet',
-      function: () => {
-        console.log('filter');
-      },
+      function: () => {},
     },
     {
       name: 'Click away',
-      function: () => {
-        console.log('filter');
-      },
+      function: () => {},
     },
   ];
 
@@ -118,8 +109,6 @@ export function FilterMenuBackpack() {
       </div>
     </>
   );
-
-  //
 }
 
 export function FilterMenuDropdown({ filterOptions }) {
@@ -135,7 +124,6 @@ export function FilterMenuDropdown({ filterOptions }) {
             <div
               key={index}
               onClick={() => {
-                //handleOpen();
                 filter.function();
               }}
             >

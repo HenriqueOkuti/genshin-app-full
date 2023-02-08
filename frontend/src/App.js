@@ -8,7 +8,7 @@ import { Background } from './layouts/layouts';
 import { OAuth } from './pages/Authentication/OAuth';
 import { BackpackManager } from './pages/Dashboard/Backpack/Backpack';
 import { CharactersManager } from './pages/Dashboard/Characters/Characters';
-import { Home, HomeManager } from './pages/Dashboard/Home/Home';
+import { HomeManager } from './pages/Dashboard/Home/Home';
 import { ProfileManager } from './pages/Dashboard/Profile/Profile';
 import { TasksManager } from './pages/Dashboard/Tasks/Tasks';
 import { Dashboard, LandingPage, Login, SignUp } from './pages/pages';
@@ -31,6 +31,11 @@ export default function App() {
     if (!userTheme) {
       const availableThemes = DefaultThemes;
       setUserTheme(availableThemes[0]);
+    }
+
+    const items = localStorage.getItem('items');
+    if (items) {
+      localStorage.removeItem('items');
     }
   }, []);
 

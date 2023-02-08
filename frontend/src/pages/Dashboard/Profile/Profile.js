@@ -17,9 +17,6 @@ export function ProfileManager() {
     image: 'https://giffiles.alphacoders.com/214/214140.gif',
   });
 
-  //console.log('use this to update profile');
-  //console.log(forceUpdate, setForceUpdate);
-
   if (!token) {
     setToken(localStorage.getItem('token'));
   }
@@ -38,7 +35,6 @@ export function ProfileManager() {
   }, [updatedData]);
 
   if (window.innerWidth > 700) {
-    //Render main version
     if (userData?.name) {
       return (
         <AuxContainer>
@@ -51,8 +47,6 @@ export function ProfileManager() {
         </AuxContainer>
       );
     } else {
-      //setFetch(true);
-
       return (
         <AuxContainer>
           <ProfileHeaders>
@@ -63,7 +57,6 @@ export function ProfileManager() {
       );
     }
   } else {
-    //Render mobile version
     if (userData?.name) {
       return (
         <AuxContainer>
@@ -76,8 +69,6 @@ export function ProfileManager() {
         </AuxContainer>
       );
     } else {
-      //setFetch(true);
-
       return (
         <AuxContainer>
           <ProfileHeaders>

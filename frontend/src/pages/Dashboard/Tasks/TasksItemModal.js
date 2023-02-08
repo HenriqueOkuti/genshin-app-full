@@ -47,8 +47,6 @@ export default function NewItemModal({ taskId, setNewTaskInfo, newTaskInfo }) {
     p: 4,
   };
 
-  //console.log(specificItems);
-
   return (
     <div>
       <AddItemButtom theme={userTheme.palette}>
@@ -94,10 +92,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef('');
 
-  //fetch all items
-  //import the images
-  //join images with items
-
   const filterOptions = [
     {
       name: 'Weekly Boss Items',
@@ -115,7 +109,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           setCurrentFilter({ name: '(weekly)' });
           setSpecificItems([...allItems.weeklyBossMats]);
         }
-        //console.log('filter');
       },
     },
     {
@@ -134,7 +127,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           setCurrentFilter({ name: '(boss)' });
           setSpecificItems([...allItems.bossMats]);
         }
-        //console.log('filter');
       },
     },
     {
@@ -153,7 +145,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           setCurrentFilter({ name: '(dungeon)' });
           setSpecificItems([...allItems.dungeonMats]);
         }
-        //console.log('filter');
       },
     },
     {
@@ -172,7 +163,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           setCurrentFilter({ name: '(enemy)' });
           setSpecificItems([...allItems.enemyMats]);
         }
-        //console.log('filter');
       },
     },
     {
@@ -191,7 +181,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           setCurrentFilter({ name: '(local)' });
           setSpecificItems([...allItems.localSpecialty]);
         }
-        //console.log('filter');
       },
     },
     {
@@ -217,7 +206,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           ].sort((a, b) => a.name.localeCompare(b.name));
           setSpecificItems(sortedList);
         }
-        //console.log('filter');
       },
     },
     {
@@ -243,7 +231,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
           ].sort((a, b) => b.name.localeCompare(a.name));
           setSpecificItems(sortedList);
         }
-        //console.log('filter');
       },
     },
   ];
@@ -284,8 +271,6 @@ export function FilterMenuItemsModal({ allItems, setSpecificItems, currentFilter
       </div>
     </>
   );
-
-  //
 }
 
 export function FilterMenuDropdown({ filterOptions }) {
@@ -301,7 +286,6 @@ export function FilterMenuDropdown({ filterOptions }) {
             <div
               key={index}
               onClick={() => {
-                //handleOpen();
                 filter.function();
               }}
             >

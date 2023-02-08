@@ -7,6 +7,11 @@ export const AuxContainer = styled.div`
   margin: 0 5% 0 5%;
 `;
 
+export const TasksContainer = styled.div`
+  height: 90%;
+  overflow-y: scroll;
+`;
+
 export const HomeHeader = styled.div`
   display: flex;
   align-items: center;

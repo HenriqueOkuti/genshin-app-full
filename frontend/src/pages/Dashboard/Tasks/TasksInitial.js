@@ -5,28 +5,49 @@ import { HandleRedirectButton } from './TasksRedirect';
 import { RenderTasks } from './TasksRenderList';
 import { AuxContainer, Dropdown, DropdownAnchor, TasksHeader, TasksHeaderButtons, TasksList } from './TasksStyles';
 
-export function TasksInitialMain({ userTasks, setTaskToMod, setPageState, windowWidth, setFetchAgain, fetchAgain }) {
-  const [filterType, setFilterType] = useState({ name: null });
-  const [updatedFilter, setUpdatedFilter] = useState(false);
-  const [suppText, setSuppText] = useState('');
-  const [filteredTasks, setFilteredTasks] = useState([...userTasks]);
+export function TasksInitialMain({
+  filteredTasks,
+  userTasks,
+  setTaskToMod,
+  setPageState,
+  windowWidth,
+  setFetchAgain,
+  fetchAgain,
+  filterType,
+  setFilterType,
+  setFilteredTasks,
+}) {
+  const filterDict = {
+    null: '',
+    az: '(A-Z)',
+    za: '(Z-A)',
+    created: '(Created at)',
+    updated: '(Updated at)',
+    date: '(Day)',
+  };
 
   return (
     <>
       <AuxContainer>
         <TasksHeader>
-          <div onClick={() => setFetchAgain(!fetchAgain)}>User tasks</div>
+          <div onClick={() => setFetchAgain(!fetchAgain)}>User tasks {filterDict[filterType.name]}</div>
           <TasksHeaderButtons>
             <div>
               <HandleRedirectButton pageState={'initial'} setPageState={setPageState} />
             </div>
-            {/* <div>
-              <FilterMenuInitial />
-            </div> */}
+            <div>
+              <FilterMenuInitial
+                filterType={filterType}
+                setFilterType={setFilterType}
+                userTasks={userTasks}
+                filteredTasks={filteredTasks}
+                setFilteredTasks={setFilteredTasks}
+              />
+            </div>
           </TasksHeaderButtons>
         </TasksHeader>
         <TasksList>
-          {userTasks.map((task, index) => (
+          {(filteredTasks[0] ? filteredTasks : userTasks).map((task, index) => (
             <RenderTasks
               key={index}
               task={task}
@@ -41,48 +62,135 @@ export function TasksInitialMain({ userTasks, setTaskToMod, setPageState, window
   );
 }
 
-export function TasksInitialMobile({ userTasks, setTaskToMod, setPageState, windowWidth }) {
+export function TasksInitialMobile({
+  filteredTasks,
+  userTasks,
+  setTaskToMod,
+  setPageState,
+  windowWidth,
+  setFetchAgain,
+  fetchAgain,
+  filterType,
+  setFilterType,
+  setFilteredTasks,
+}) {
+  const filterDict = {
+    null: '',
+    az: '(A-Z)',
+    za: '(Z-A)',
+    created: '(Created at)',
+    updated: '(Updated at)',
+    date: '(Day)',
+  };
+
   return (
     <>
       <AuxContainer>
         <TasksHeader>
-          <div>User tasks mobile</div>
+          <div onClick={() => setFetchAgain(!fetchAgain)}>User tasks {filterDict[filterType.name]}</div>
           <TasksHeaderButtons>
             <div>
               <HandleRedirectButton pageState={'initial'} setPageState={setPageState} />
             </div>
             <div>
-              <FilterMenuInitial />
+              <FilterMenuInitial
+                filterType={filterType}
+                setFilterType={setFilterType}
+                userTasks={userTasks}
+                filteredTasks={filteredTasks}
+                setFilteredTasks={setFilteredTasks}
+              />
             </div>
           </TasksHeaderButtons>
         </TasksHeader>
-        <div>Soon™</div>
+        <TasksList>
+          {(filteredTasks[0] ? filteredTasks : userTasks).map((task, index) => (
+            <RenderTasks
+              key={index}
+              task={task}
+              setTaskToMod={setTaskToMod}
+              setPageState={setPageState}
+              windowWidth={windowWidth}
+            />
+          ))}
+        </TasksList>
       </AuxContainer>
     </>
   );
 }
 
-export function FilterMenuInitial() {
+export function FilterMenuInitial({ filterType, setFilterType, userTasks, filteredTasks, setFilteredTasks }) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
 
+  for (let i = 0; i < userTasks.length; i++) {
+    const creation = userTasks[0]?.createdAt ? userTasks[0].createdAt : false;
+    const updated = userTasks[0]?.updatedAt ? userTasks[0].updatedAt : false;
+
+    if (creation && updated) {
+      userTasks[i].createdNumber = Date.parse(JSON.parse(creation));
+      userTasks[i].updatedNumber = Date.parse(JSON.parse(updated));
+    }
+  }
+
   const filterOptions = [
     {
-      name: 'Filter option 1',
+      name: 'A-Z',
       function: () => {
-        console.log('filter');
+        if (filterType.name === 'az') {
+          setFilterType({ name: 'null' });
+          setFilteredTasks([]);
+        } else {
+          setFilterType({ name: 'az' });
+          setFilteredTasks([...[...userTasks].sort((a, b) => a.name.localeCompare(b.name))]);
+        }
       },
     },
     {
-      name: 'Filter option 2',
+      name: 'Z-A',
       function: () => {
-        console.log('filter');
+        if (filterType.name === 'za') {
+          setFilterType({ name: 'null' });
+          setFilteredTasks([]);
+        } else {
+          setFilterType({ name: 'za' });
+          setFilteredTasks([...[...userTasks].sort((a, b) => b.name.localeCompare(a.name))]);
+        }
       },
     },
     {
-      name: 'Filter option 3',
+      name: 'Created',
       function: () => {
-        console.log('filter');
+        if (filterType.name === 'created') {
+          setFilterType({ name: 'null' });
+          setFilteredTasks([]);
+        } else {
+          setFilterType({ name: 'created' });
+          setFilteredTasks([...[...userTasks].sort((a, b) => a.createdNumber - b.createdNumber)]);
+        }
+      },
+    },
+    {
+      name: 'Updated',
+      function: () => {
+        if (filterType.name === 'updated') {
+          setFilterType({ name: 'null' });
+          setFilteredTasks([]);
+        } else {
+          setFilterType({ name: 'updated' });
+          setFilteredTasks([...[...userTasks].sort((a, b) => a.updatedNumber - b.updatedNumber)]);
+        }
+      },
+    },
+    {
+      name: 'Day',
+      function: () => {
+        if (filterType.name === 'day') {
+          setFilterType({ name: 'null' });
+          setFilteredTasks([]);
+        } else {
+          setFilterType({ name: 'day' });
+        }
       },
     },
   ];
@@ -123,8 +231,6 @@ export function FilterMenuInitial() {
       </div>
     </>
   );
-
-  //
 }
 
 export function FilterMenuDropdown({ filterOptions }) {
