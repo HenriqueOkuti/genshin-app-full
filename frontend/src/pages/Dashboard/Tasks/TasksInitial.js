@@ -3,7 +3,15 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { useTheme, useSetTheme } from '../../../hooks/useTheme';
 import { HandleRedirectButton } from './TasksRedirect';
 import { RenderTasks } from './TasksRenderList';
-import { AuxContainer, Dropdown, DropdownAnchor, TasksHeader, TasksHeaderButtons, TasksList } from './TasksStyles';
+import {
+  AuxContainer,
+  Dropdown,
+  DropdownAnchor,
+  DropdownContent,
+  TasksHeader,
+  TasksHeaderButtons,
+  TasksList,
+} from './TasksStyles';
 
 export function TasksInitialMain({
   filteredTasks,
@@ -182,17 +190,6 @@ export function FilterMenuInitial({ filterType, setFilterType, userTasks, filter
         }
       },
     },
-    {
-      name: 'Day',
-      function: () => {
-        if (filterType.name === 'day') {
-          setFilterType({ name: 'null' });
-          setFilteredTasks([]);
-        } else {
-          setFilterType({ name: 'day' });
-        }
-      },
-    },
   ];
 
   const handleOpen = () => {
@@ -223,7 +220,7 @@ export function FilterMenuInitial({ filterType, setFilterType, userTasks, filter
         </div>
         {open ? (
           <DropdownAnchor ref={wrapperRef}>
-            <FilterMenuDropdown handleOpen={handleOpen} filterOptions={filterOptions} />
+            <FilterMenuDropdown filterType={filterType} handleOpen={handleOpen} filterOptions={filterOptions} />
           </DropdownAnchor>
         ) : (
           <div></div>
@@ -232,26 +229,27 @@ export function FilterMenuInitial({ filterType, setFilterType, userTasks, filter
     </>
   );
 }
-
-export function FilterMenuDropdown({ filterOptions }) {
+export function FilterMenuDropdown({ filterOptions, filterType }) {
   const theme = useTheme();
   const setTheme = useSetTheme();
   const [userTheme, setUserTheme] = [theme, setTheme];
+  const [selected, setSelected] = useState(filterType.name);
 
   return (
     <>
       <Dropdown theme={userTheme.palette}>
         {filterOptions.map((filter, index) => {
           return (
-            <div
+            <DropdownContent
+              colors={filter.name === selected ? true : false}
               key={index}
               onClick={() => {
-                //handleOpen();
                 filter.function();
+                setSelected(filter.name);
               }}
             >
               <p>{filter.name}</p>
-            </div>
+            </DropdownContent>
           );
         })}
       </Dropdown>

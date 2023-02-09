@@ -6,6 +6,7 @@ import {
   AuxContainer,
   Dropdown,
   DropdownAnchor,
+  DropdownContent,
   EmptyTasksContainer,
   HomeHeader,
   HomeHeaderButtons,
@@ -36,6 +37,7 @@ export function HomeManager() {
     let tokenAux;
     if (!token) {
       tokenAux = localStorage.getItem('token');
+
       setToken(tokenAux);
     }
 
@@ -212,7 +214,7 @@ export function FilterMenuHome({ filterType, setFilterType, dailyTasks, setDaily
             </div>
             {open ? (
               <DropdownAnchor ref={wrapperRef}>
-                <FilterMenuDropdown handleOpen={handleOpen} filterOptions={filterOptions} />
+                <FilterMenuDropdown filterType={filterType} handleOpen={handleOpen} filterOptions={filterOptions} />
               </DropdownAnchor>
             ) : (
               <div></div>
@@ -226,24 +228,27 @@ export function FilterMenuHome({ filterType, setFilterType, dailyTasks, setDaily
   );
 }
 
-export function FilterMenuDropdown({ filterOptions }) {
+export function FilterMenuDropdown({ filterOptions, filterType }) {
   const theme = useTheme();
   const setTheme = useSetTheme();
   const [userTheme, setUserTheme] = [theme, setTheme];
+  const [selected, setSelected] = useState(filterType.name);
 
   return (
     <>
       <Dropdown theme={userTheme.palette}>
         {filterOptions.map((filter, index) => {
           return (
-            <div
+            <DropdownContent
+              colors={filter.name === selected ? true : false}
               key={index}
               onClick={() => {
                 filter.function();
+                setSelected(filter.name);
               }}
             >
               <p>{filter.name}</p>
-            </div>
+            </DropdownContent>
           );
         })}
       </Dropdown>

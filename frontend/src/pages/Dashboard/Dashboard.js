@@ -19,7 +19,7 @@ export function Dashboard() {
     id: 0,
     name: 'Loading...',
     email: 'Loading email',
-    image: 'https://giffiles.alphacoders.com/214/214140.gif',
+    image: '',
   });
   const [forceUpdate, setForceUpdate] = useState('false');
 

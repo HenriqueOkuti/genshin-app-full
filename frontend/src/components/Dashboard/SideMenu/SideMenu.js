@@ -34,9 +34,9 @@ export function SideMenu({ update, setUpdate, userData }) {
           <Button onClick={() => navigate('/dashboard/characters')}>
             <ButtonText>Characters</ButtonText>
           </Button>
-          <Button onClick={() => navigate('/dashboard/backpack')}>
+          {/* <Button onClick={() => navigate('/dashboard/backpack')}>
             <ButtonText>Backpack</ButtonText>
-          </Button>
+          </Button> */}
           <Button onClick={() => navigate('/dashboard/tasks')}>
             <ButtonText>Task List</ButtonText>
           </Button>

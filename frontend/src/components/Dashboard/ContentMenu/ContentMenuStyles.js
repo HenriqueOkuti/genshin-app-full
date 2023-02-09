@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const MenuBackground = styled.div`
-  margin: 5%;
   width: 90%;
   height: 90%;
 

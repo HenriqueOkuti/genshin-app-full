@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { toast } from 'react-toastify';
 import { loginGoogle } from '../../services/services';
+import UserContext from '../../contexts/UserContext';
+import { useContext } from 'react';
 
 export function OAuth() {
   const navigate = useNavigate();
@@ -24,7 +26,8 @@ export function OAuth() {
   }, [update]);
 
   if (token) {
-    navigate('/dashboard/home');
+    useContext(UserContext).setUserToken(token);
+    navigate('/');
   }
 
   if (!code && !googleData) {

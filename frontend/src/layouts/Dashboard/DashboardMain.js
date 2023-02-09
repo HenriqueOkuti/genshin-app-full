@@ -29,6 +29,10 @@ export const SideMenuContainer = styled.div`
 `;
 
 export const MainMenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 100%;
   width: 100%;
   background: ${(props) => props.colors.hex5};

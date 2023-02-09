@@ -76,11 +76,15 @@ export const Dropdown = styled.div`
   -moz-box-shadow: -1px 3px 10px 2px rgba(0, 0, 0, 0.75);
   box-shadow: -1px 3px 10px 2px rgba(0, 0, 0, 0.75);
   border-radius: 15px;
+`;
 
-  div {
-    font-size: 24px;
-    height: 55px;
-  }
+export const DropdownContent = styled.div`
+  width: 95%;
+  font-size: 24px;
+  min-height: 40px;
+  height: auto;
+  background-color: ${(props) => (props.colors ? '#DFCFBE' : 'none')};
+  border-radius: 15px;
 `;
 
 export const TasksList = styled.div`
@@ -89,7 +93,7 @@ export const TasksList = styled.div`
   justify-items: center;
   align-items: flex-start;
 
-  margin: 15px 0 5% 0;
+  //margin: 15px 0 5% 0;
   height: 90%;
   width: 100%;
   overflow-y: scroll;

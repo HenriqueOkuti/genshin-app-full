@@ -14,11 +14,12 @@ export function ProfileManager() {
     id: 0,
     name: 'Loading Username',
     email: 'Loading email',
-    image: 'https://giffiles.alphacoders.com/214/214140.gif',
+    image: '',
   });
 
   if (!token) {
     setToken(localStorage.getItem('token'));
+    setUpdatedData(!updatedData);
   }
 
   useEffect(async () => {

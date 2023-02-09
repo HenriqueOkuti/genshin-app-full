@@ -11,6 +11,7 @@ import {
   CharactersList,
   Dropdown,
   DropdownAnchor,
+  DropdownContent,
 } from './CharactersStyles';
 
 //main version
@@ -152,7 +153,7 @@ export function FilterMenuAdd({ setUpdatedFilter, updatedFilter, setFilterType, 
         </div>
         {open ? (
           <DropdownAnchor ref={wrapperRef}>
-            <FilterMenuDropdown handleOpen={handleOpen} filterOptions={filterCharsOptions} />
+            <FilterMenuDropdown filterType={filterType} handleOpen={handleOpen} filterOptions={filterCharsOptions} />
           </DropdownAnchor>
         ) : (
           <div></div>
@@ -162,25 +163,27 @@ export function FilterMenuAdd({ setUpdatedFilter, updatedFilter, setFilterType, 
   );
 }
 
-export function FilterMenuDropdown({ filterOptions }) {
+export function FilterMenuDropdown({ filterOptions, filterType }) {
   const theme = useTheme();
   const setTheme = useSetTheme();
   const [userTheme, setUserTheme] = [theme, setTheme];
+  const [selected, setSelected] = useState(filterType.name);
 
   return (
     <>
       <Dropdown theme={userTheme.palette}>
         {filterOptions.map((filter, index) => {
           return (
-            <div
+            <DropdownContent
+              colors={filter.name === selected ? true : false}
               key={index}
               onClick={() => {
-                //handleOpen();
                 filter.function();
+                setSelected(filter.name);
               }}
             >
               <p>{filter.name}</p>
-            </div>
+            </DropdownContent>
           );
         })}
       </Dropdown>

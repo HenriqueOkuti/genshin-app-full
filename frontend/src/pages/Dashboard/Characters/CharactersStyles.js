@@ -168,10 +168,15 @@ export const Dropdown = styled.div`
   box-shadow: -1px 3px 10px 2px rgba(0, 0, 0, 0.75);
   border-radius: 15px;
 
-  div {
-    font-size: 24px;
-    height: 40px;
-  }
+  padding: 5px 0 5px 0;
+`;
+
+export const DropdownContent = styled.div`
+  width: 95%;
+  font-size: 24px;
+  height: 40px;
+  background-color: ${(props) => (props.colors ? '#DFCFBE' : 'none')};
+  border-radius: 15px;
 `;
 
 export const RenderAddCharacterContainer = styled.div`
