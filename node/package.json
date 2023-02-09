@@ -1,7 +1,7 @@
 {
   "name": "genshin-app-back",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end application for the Genshin Task Manager app",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development ts-node -r tsconfig-paths/register ./source/server.ts -e ts",
@@ -13,7 +13,7 @@
     "seed": "prisma db seed"
   },
   "keywords": [],
-  "author": "",
+  "author": "Henrique Krastins Okuti",
   "license": "ISC",
   "prisma": {
     "seed": "npm run dev:load-envs -- ts-node  prisma/seed.ts"
